@@ -1,0 +1,533 @@
+/* ==========================================================================
+   1. CORE UI DESIGN SYSTEM & VARIABLES
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #ffcc00;
+    --primary-hover: #e6b800;
+    --bg-dark: #0f0f11;
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+    --text-muted: #a0a0a8;
+    --glass-panel: rgba(0, 0, 0, 0.65);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Adds offset space to account for the fixed header when jumping down page */
+    scroll-padding-top: 80px; 
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. REUSABLE SYSTEM-WIDE COMPONENTS (Header, Layout Cards, Footers)
+   ========================================================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(15, 15, 17, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+nav .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+/* Hero Background Wrapper Engine */
+.page-wrapper {
+    position: relative;
+    min-height: 100vh;
+    padding: 120px 5% 60px 5%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(15,15,17,0.7) 0%, rgba(15,15,17,0.95) 100%);
+    z-index: 1;
+}
+
+.content-frame {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    background: var(--glass-panel);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 50px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--primary);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.section-desc {
+    font-size: 16px;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+}
+
+/* Footer Structuring */
+footer {
+    background-color: #0b0b0d;
+    border-top: 1px solid var(--card-border);
+    padding: 40px 5% 0 5%;
+    position: relative;
+    z-index: 5;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.footer-section h3 {
+    color: var(--primary);
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-section p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--card-border);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   3. HOME SECTION SPECIFIC STYLES
+   ========================================================================== */
+.home-bg { background-image: url('back.jpg'); }
+
+.hero-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.popular-places h2 {
+    font-size: 22px;
+    color: var(--primary);
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.home-destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.home-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 260px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.home-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.home-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(360deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 60%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+}
+
+.home-card-overlay h3 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.home-card:hover img {
+    transform: scale(1.1);
+}
+
+.home-card:hover .home-card-overlay h3 {
+    color: var(--primary);
+}
+
+/* ==========================================================================
+   4. ABOUT SECTION SPECIFIC STYLES
+   ========================================================================== */
+.about-bg { background-image: url('BANNER.webp'); }
+
+.about-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    align-items: center;
+    text-align: left;
+}
+
+.about-image img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+}
+
+.about-content h1 {
+    font-size: 32px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.about-content h1 span { color: var(--primary); }
+
+.about-content h2 {
+    font-size: 24px;
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.about-content p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.about-content p b {
+    color: var(--text-main);
+    display: inline-block;
+    margin-top: 15px;
+}
+
+/* ==========================================================================
+   5. DESTINATION SECTION SPECIFIC STYLES
+   ========================================================================== */
+.destination-bg { background-image: url('gallery5.jpg'); }
+
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.dest-card {
+    position: relative;
+    height: 320px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.dest-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.dest-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 15, 17, 0.9);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.dest-overlay h3 {
+    font-size: 20px;
+    color: var(--primary);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 5px;
+    width: 80%;
+    text-align: center;
+}
+
+.dest-overlay h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-main);
+    margin: 4px 0;
+    text-align: center;
+}
+
+.dest-card:hover img {
+    transform: scale(1.1);
+}
+
+.dest-card:hover .dest-overlay {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   6. GALLERY SECTION SPECIFIC STYLES
+   ========================================================================== */
+.gallery-bg { background-image: url('gallery1.jpg'); }
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* ==========================================================================
+   7. SERVICE SECTION SPECIFIC STYLES
+   ========================================================================== */
+.service-bg { background-image: url('servispic.jpg'); }
+
+.services-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.service-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 35px 25px;
+    border-radius: 16px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.service-box:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.service-box .icon {
+    font-size: 36px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.service-box h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--primary);
+}
+
+.service-box p {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: justify;
+}
+
+/* ==========================================================================
+   8. CONTACT SECTION SPECIFIC STYLES
+   ========================================================================== */
+.contact-bg { background-image: url('contact.png'); }
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 50px;
+    text-align: left;
+    align-items: start;
+}
+
+.contact-left h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.contact-left span { color: var(--primary); }
+
+.contact-left p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.contact-right {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 35px;
+}
+
+.contact-info h3 {
+    font-size: 15px;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    margin-top: 20px;
+}
+
+.contact-info h3:first-child {
+    margin-top: 0;
+}
+
+.contact-info p {
+    color: var(--text-main);
+    font-size: 14px;
+    text-align: left;
+}
+
+/* ==========================================================================
+   9. MEDIA QUERIES FOR RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 968px) {
+    .about-content-wrapper, .contact-container {
+        grid-template-columns: 1fr;
+    }
+    .about-image img {
+        height: 300px;
+    }
+    .hero-content h1 {
+        font-size: 32px;
+    }
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    .page-wrapper {
+        padding-top: 160px;
+    }
+}
